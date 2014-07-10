@@ -1,1 +1,8 @@
-console.log('Initial piece of an abstract syntax tree.');
+var ASTree = function(){
+   if (!(this instanceof ASTree)) return new ASTree();
+
+   this.splitters = [];
+   this.renderers = [];
+};
+
+module.exports = new ASTree();

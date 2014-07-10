@@ -5,4 +5,4 @@ var ASTree = function(){
    this.renderers = [];
 };
 
-module.exports = new ASTree();
+module.exports = ASTree;

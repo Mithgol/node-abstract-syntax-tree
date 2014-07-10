@@ -16,6 +16,8 @@ You may visit https://github.com/Mithgol/node-abstract-syntax-tree#readme occasi
 
 ## Testing the AST module
 
+[![(build testing status)](https://travis-ci.org/Mithgol/node-abstract-syntax-tree.svg?branch=master)](https://travis-ci.org/Mithgol/node-abstract-syntax-tree)
+
 The tests are not included in the npm package of the module (to keep it small). Use the version from GitHub.
 
 It is necessary to install [Mocha](http://visionmedia.github.io/mocha/) and [JSHint](http://jshint.com/) for testing.

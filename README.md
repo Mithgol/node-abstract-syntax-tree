@@ -69,12 +69,18 @@ someTree.addSplitter(
       if( typeof inputData !== 'string' ) return [ inputData ];
       return require('uue').split(inputData);
    }, [
-      { type: 'quote', props: [ 'quotedText' ]
+      { type: 'quote', props: [ 'quotedText' ] }
    ]
 );
 ```
 
-In this example [the UUE module's](https://github.com/Mithgol/node-uue/) [`.split(text)`](https://github.com/Mithgol/node-uue/#splittext) method is added to a tree and later will be used to get UUE-decoded files from the text input (other types of input are returned as is, wrapped in array). It can also support processing of the quoted text in the nodes representing quotes that appeared within the original text.
+In this example [the UUE module's](https://github.com/Mithgol/node-uue/) [`.split(text)`](https://github.com/Mithgol/node-uue/#splittext) method is added to a tree as a splitter:
+
+* That splitter later will be used to get UUE-decoded files from the text input.
+
+* That splitter rejects other (non-text) types of input by returning them as is (though wrapped in an array, because that's what a splitter must do).
+
+* That splitter can also process text from quotes (in the nodes representing quotes that appeared within the original text). A support for such processing is achieved by passing an item in `supportedNodeTypes` (the splitter's source code in not altered).
 
 ## Testing the AST module
 

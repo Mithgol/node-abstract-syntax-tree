@@ -5,4 +5,9 @@ var ASTree = function(){
    this.renderers = [];
 };
 
+ASTree.prototype.addSplitter = function(splitter, supportedNodeTypes){
+   if( typeof supportedNodeTypes === 'undefined' ) supportedNodeTypes = [];
+   this.splitters.push(splitter, supportedNodeTypes);
+};
+
 module.exports = ASTree;

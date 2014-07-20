@@ -2,6 +2,8 @@ This project (`node-abstract-syntax-tree`) is an implementation of AST (abstrac
 
 It can be used to build renderers of markup languages.
 
+**Note:**   the module is currently in an early phase of its development and thus does not have even minimal feature completeness.
+
 ## Installing the AST module
 
 [![(npm package version)](https://nodei.co/npm/astree.png?downloads=true)](https://npmjs.org/package/astree) [![(a histogram of downloads)](https://nodei.co/npm-dl/astree.png?months=3)](https://npmjs.org/package/astree)

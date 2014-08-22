@@ -100,4 +100,4 @@ After that you may run `npm test` (in the directory of the AST module).
 
 ## License
 
-MIT license (see the `LICENSE` file)
+MIT license (see the `LICENSE` file).

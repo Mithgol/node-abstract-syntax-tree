@@ -1,6 +1,6 @@
 This project (`node-abstract-syntax-tree`) is an implementation of AST (abstract syntax tree) for Node.js.
 
-It can be used to build renderers of markup languages.
+It is planned as a tool that assists in building renderers of markup languages, renderers that convert some initial string (for example, a text marked with [Markdown](http://daringfireball.net/projects/markdown/) or [WakabaMark](http://wakaba.c3.cx/docs/docs.html#WakabaMark)) to its another string form (for example, HTML5) using an abstract syntax tree as an intermediate representation.
 
 **Note:**   the module is currently in an early phase of its development and thus does not have even minimal feature completeness.
 
@@ -27,7 +27,17 @@ var someTree = ASTree();
 
 (John Resig's [self-calling constructor](http://ejohn.org/blog/simple-class-instantiation/) is used and thus the `new` keyword is optional.)
 
-A constructed object has the following method:
+A constructed object has the following methods:
+
+### render(inputString)
+
+Renders the given `inputString` to some output string, using an abstract syntax tree as an intermediate representation.
+
+The work consists of the following two parts:
+
+# **Splitting.** The given `inputString` is split into an array that represents an abstract syntax tree.
+
+# **Rendering.** Items of the generated abstract syntax tree are rendered
 
 ### addSplitter(splitter, supportedNodeTypes)
 

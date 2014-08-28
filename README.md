@@ -35,9 +35,9 @@ Renders the given `inputString` to some output string, using an abstract synt
 
 The work consists of the following two parts:
 
-# **Splitting.** The given `inputString` is split into an array that represents an abstract syntax tree.
+1. **Splitting.** The given `inputString` is split into an array that represents an abstract syntax tree.
 
-# **Rendering.** Items of the generated abstract syntax tree are rendered
+2. **Rendering.** Items of the generated abstract syntax tree are rendered
 
 #### Splitting
 
@@ -59,7 +59,7 @@ The `splitter` value must be a function that has only one parameter (for inpu
 
 By default, when the splitter is applied to some element of the AST (`targetElement`), a simple `splitter(targetElement)` call is performed, and the returned value becomes a part of the new AST.
 
-However, that simple default behaviour might be changed by an optional `supportedNodeTypes` array (empty by default); that array contains descriptions of known node types supported by the splitter. Each of elements of the `supportedNodeTypes` must be an object with the following properties:
+However, that simple default behaviour might be changed by an optional `supportedNodeTypes` array (empty by default); that array contains descriptions of known node types supported by the splitter. Each of elements of the `supportedNodeTypes` must be an object with the following properties:
 
 * `type` — a JavaScript string ID of the supported node's type.
 

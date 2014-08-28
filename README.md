@@ -49,7 +49,13 @@ The results of such application (i.e. whatever is returned from the splitter)
 
 There's no AST before the first splitter, and thus the first splitter is applied to `inputString`.
 
-Concatenations are performed by the [`Array.prototype.concat()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method. Therefore, if a splitter returns an array, elements of that array are individually concatenated to the AST; if a splitter returns something else, the returned value becomes a single element in the AST. (If a splitter has nothing to add to the AST, it should return an empty array.)
+Concatenations are performed by the [`Array.prototype.concat()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method. Therefore,
+
+* if a splitter returns an array, elements of that array are individually concatenated to the AST;
+
+* if a splitter returns something else, the returned value becomes a single element in the AST;
+
+* if a splitter has nothing to add to the AST (i.e. it erases from the AST an element that was given to the splitter), it should return an empty array.
 
 ### addSplitter(splitter, supportedNodeTypes)
 

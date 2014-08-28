@@ -39,46 +39,48 @@ The work consists of the following two parts:
 
 # **Rendering.** Items of the generated abstract syntax tree are rendered
 
+#### Splitting
+
+Splitters are applied in the order of appearance, i.e. in the order they were defined by calls to the `.addSplitter` method (see below).
+
+Each splitter is applied individually to each of the elements of the array representing the abstract syntax tree in its state left from the previous splitter.
+
+The results of such application (i.e. whatever is returned from the splitter) are concatenated to a new array. (The next splitter is applied to the elements of that new array.)
+
+There's no AST before the first splitter, and thus the first splitter is applied to `inputString`.
+
+Concatenations are performed by the [`Array.prototype.concat()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method. Therefore, if a splitter returns an array, elements of that array are individually concatenated to the AST; if a splitter returns something else, the returned value becomes a single element in the AST. (If a splitter has nothing to add to the AST, it should return an empty array.)
+
 ### addSplitter(splitter, supportedNodeTypes)
 
-Adds a splitter (also known as a tokenizer) to a tree.
+Adds a splitter (also known as a tokenizer) to a tree. That splitter is later applied to individual elements of the AST when the `.render()` method is called.
 
-Each splitter impements a step of building a tree. When a tree is built out of its initial (string) representation, the splitters are called in the order of appearance (i.e. in the order in which `.addSplitter` method calls added the splitters to a tree):
+The `splitter` value must be a function that has only one parameter (for input data), e.g. `function(inputData){…}`.
 
-* The first splitter receives the initial (string) representation of the tree and returns an array of tree nodes it could create from that string.
+By default, when the splitter is applied to some element of the AST (`targetElement`), a simple `splitter(targetElement)` call is performed, and the returned value becomes a part of the new AST.
 
-* The next splitter is called for each of the elements of the array returned from the previous splitter and then the returned arrays are contatenated.
-
-And thus the following requirements for the `splitter` given to the `.addSplitter` method:
-
-* `splitter` must be a function that has only one parameter (for input data), e.g. `function(inputData){…}`.
-
-* When `splitter` is called, that `inputData` parameter is either a JavaScript string (a part or a whole of the initial representation) or a JavaScript object (representing a tree's node), the latter always has a property `type` (a JavaScript string ID of the node's type).
-
-* `splitter` must return a JavaScript array. If the array is not empty, each of its elements must be either a JavaScript string or a JavaScript object (representing a tree's node), the latter must have a property `type` (a JavaScript string ID of the node's type).
-
-An optional `supportedNodeTypes` array (empty by default) contains descriptions of known node types supported by the splitter. Each of elements of the `supportedNodeTypes` must be an object with the following properties:
+However, that simple default behaviour might be changed by an optional `supportedNodeTypes` array (empty by default); that array contains descriptions of known node types supported by the splitter. Each of elements of the `supportedNodeTypes` must be an object with the following properties:
 
 * `type` — a JavaScript string ID of the supported node's type.
 
-* `props` — an array of JavaScript strings containing the targeted properties of that node.
+* `props` — an array of JavaScript strings containing names of the targeted properties of such node.
 
-When a tree's node (a JavaScript object) is encountered in array returned by the previous splitter, the next splitter is applied differently if the node is supported:
+If `targetElement` is an object and if `targetElement.type` is a property containing an ID of one of the supported types, then the default behaviour changes to the following two steps:
 
-* if the node's not supported, `splitter(node)` is called and the returned array is used
+1. `splitter` is applied to each of the targeted properties of `targetElement` as if that property were an AST:
+   * `targetElement[propertyName] = targetElement[propertyName].map(splitter)` for array properties
+   * `targetElement[propertyName] = [ splitter(targetElement[propertyName]) ]` for non-array properties
 
-* if the node's supported, than for each of the targeted properties of that node:
-   * if the property's value is a string, it is replaced by `splitter(value)`
-   * if the property's value is an array, then `splitter(element)` is called for each of the array's elements and then the results are concatenated to an array that replaces the property's value
+2. `targetElement` is returned to become a part of the new AST.
 
-* then (if the node's supported) an array containing the modified node (`[node]`) is used
+It is therefore possible to use `supportedNodeTypes` to support branches (subtrees) of AST as properties of some known node types.
 
-**Example:**
+#### Example
 
 ```js
 someTree.addSplitter(
    function(inputData){
-      if( typeof inputData !== 'string' ) return [ inputData ];
+      if( typeof inputData !== 'string' ) return inputData;
       return require('uue').split(inputData);
    }, [
       { type: 'quote', props: [ 'quotedText' ] }
@@ -90,9 +92,9 @@ In this example [the UUE module's](https://github.com/Mithgol/node-uue/) [`.s
 
 * That splitter later will be used to get UUE-decoded files from the text input.
 
-* That splitter rejects other (non-text) types of input by returning them as is (though wrapped in an array, because that's what a splitter must do).
+* That splitter rejects other (non-text) types of input by returning them verbatim (and they'll be concatenated to the new AST “as is”).
 
-* That splitter can also process text from quotes (in the nodes representing quotes that appeared within the original text). A support for such processing is achieved by passing an item in `supportedNodeTypes` (the splitter's source code in not altered).
+* That splitter can also process text from quotes (i.e. in the AST nodes representing quotes that appeared within the original text). A support for such processing is achieved merely by passing an item in `supportedNodeTypes` (the splitter's source code itself in not altered).
 
 ## Testing the AST module
 

@@ -1,3 +1,5 @@
+require('array.prototype.find');
+
 var ASTree = function(){
    if (!(this instanceof ASTree)) return new ASTree();
 
@@ -12,9 +14,37 @@ ASTree.prototype.render = function(initialString){
    this.splitters.forEach(function(nextSplitter){
       nextArray = [];
       prevArray.forEach(function(targetElement){
-         nextArray = nextArray.concat(
-            nextSplitter.splitter(nextPrevItem)
-         );
+         var supportedNode = nextSplitter.supportedNodeTypes.find(function(
+            supportedNodeType
+         ){
+            return targetElement.type === supportedNodeType.type;
+         });
+         if( typeof supportedNode === 'undefined' ){
+            // default behaviour: apply the splitter to the target element
+            nextArray = nextArray.concat(
+               nextSplitter.splitter(targetElement)
+            );
+            return;
+         }
+         // changed behaviour: apply the splitter to the targeted properties
+         supportedNode.props.forEach(function(targetedPropName){
+            if( Array.isArray(targetElement[targetedPropName]) ){
+               var nextPropValue = [];
+               targetElement[targetedPropName].forEach(function(propItem){
+                  nextPropValue = nextPropValue.concat(
+                     nextSplitter.splitter(propItem)
+                  );
+               });
+               targetElement[targetedPropName] = nextPropValue;
+            } else if(
+               typeof targetElement[targetedPropName] !== 'undefined'
+            ){
+               targetElement[targetedPropName] = nextSplitter.splitter(
+                  targetElement[targetedPropName]
+               );
+            }
+         });
+         nextArray = nextArray.concat(targetElement);
       });
       prevArray = nextArray;
    });

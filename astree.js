@@ -11,7 +11,7 @@ ASTree.prototype.render = function(initialString){
 
    this.splitters.forEach(function(nextSplitter){
       nextArray = [];
-      prevArray.forEach(function(nextPrevItem){
+      prevArray.forEach(function(targetElement){
          nextArray = nextArray.concat(
             nextSplitter(nextPrevItem)
          );

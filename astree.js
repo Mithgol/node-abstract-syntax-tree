@@ -13,7 +13,7 @@ ASTree.prototype.render = function(initialString){
       nextArray = [];
       prevArray.forEach(function(targetElement){
          nextArray = nextArray.concat(
-            nextSplitter(nextPrevItem)
+            nextSplitter.splitter(nextPrevItem)
          );
       });
       prevArray = nextArray;

@@ -37,7 +37,7 @@ The work consists of the following two parts:
 
 1. **Splitting.** The given `inputString` is split into an array that represents an abstract syntax tree.
 
-2. **Rendering.** Items of the generated abstract syntax tree are rendered
+2. **Rendering.** Items of the generated abstract syntax tree are rendered to strings.
 
 #### Splitting
 
@@ -56,6 +56,16 @@ Concatenations are performed by the [`Array.prototype.concat()`](https://develop
 * if a splitter returns something else, the returned value becomes a single element in the AST;
 
 * if a splitter has nothing to add to the AST (i.e. it erases from the AST an element that was given to the splitter), it should return an empty array.
+
+#### Rendering
+
+Renderers are applied to elements of the array that represents the AST in its final form (i.e. after the last splitter), converting these elements to JavaScript strings:
+
+* If an element (`targetElement`) is an object and a renderer for its type (`targetElement.type`) was defined by a call to the `.addRenderer` method (see below), then that renderer is called and its returned result replaces the `targetElement` in the AST.
+
+* If an element does not have such a corresponding renderer, a mere `.toString` is called to convert it to a string. (Unless it's already a JavaScript string and thus there's nothing to do.)
+
+Afterwards the elements of the AST are concatenated (in order of appearance) to a larger string, and that string is returned from the `.render` method.
 
 ### addSplitter(splitter, supportedNodeTypes)
 

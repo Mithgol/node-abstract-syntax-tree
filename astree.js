@@ -58,4 +58,11 @@ ASTree.prototype.addSplitter = function(splitter, supportedNodeTypes){
    });
 };
 
+ASTree.prototype.addRenderer = function(supportedNodeTypes, renderer){
+   this.renderers.push({
+      'renderer': renderer,
+      'supportedNodeTypes': supportedNodeTypes
+   });
+};
+
 module.exports = ASTree;

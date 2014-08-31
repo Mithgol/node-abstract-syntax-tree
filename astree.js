@@ -59,6 +59,9 @@ ASTree.prototype.addSplitter = function(splitter, supportedNodeTypes){
 };
 
 ASTree.prototype.addRenderer = function(supportedNodeTypes, renderer){
+   if( !Array.isArray(supportedNodeTypes) || supportedNodeTypes.length < 1 ){
+      throw new Error('Wrong `supportedNodeTypes` in `.addRenderer`.');
+   }
    this.renderers.push({
       'renderer': renderer,
       'supportedNodeTypes': supportedNodeTypes

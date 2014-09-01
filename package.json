@@ -1,7 +1,7 @@
 {
 "name": "astree",
 "main": "astree.js",
-"version": "0.0.2",
+"version": "1.0.0",
 "description": "This project (`node-abstract-syntax-tree`) is an implementation of AST (abstract syntax tree) for Node.js. It can be used to build renderers of markup languages.",
 "keywords": ["ast", "abstract syntax tree"],
 "author": { "name": "Mithgol the Webmaster" },

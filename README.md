@@ -2,8 +2,6 @@ This project (`node-abstract-syntax-tree`) is an implementation of AST (abstrac
 
 It is planned as a tool that assists in building renderers of markup languages, renderers that convert some initial string (for example, a text marked with [Markdown](http://daringfireball.net/projects/markdown/) or [WakabaMark](http://wakaba.c3.cx/docs/docs.html#WakabaMark)) to its another string form (for example, HTML5) using an abstract syntax tree as an intermediate representation.
 
-**Note:**   the module is currently in an early phase of its development and thus does not have even minimal feature completeness.
-
 ## Installing the AST module
 
 [![(npm package version)](https://nodei.co/npm/astree.png?downloads=true)](https://npmjs.org/package/astree) [![(a histogram of downloads)](https://nodei.co/npm-dl/astree.png?months=3)](https://npmjs.org/package/astree)

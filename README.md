@@ -1,4 +1,4 @@
-This project (`node-abstract-syntax-tree`) is an implementation of AST (abstract syntax tree) for Node.js.
+This project (`node-abstract-syntax-tree`) is an implementation of AST (abstract syntax tree) for Node.js. (Tested on Node.js v0.10.x only.)
 
 It is planned as a tool that assists in building renderers of markup languages, renderers that convert some initial string (for example, a text marked with [Markdown](http://daringfireball.net/projects/markdown/) or [WakabaMark](http://wakaba.c3.cx/docs/docs.html#WakabaMark)) to its another string form (for example, HTML5) using an abstract syntax tree as an intermediate representation.
 

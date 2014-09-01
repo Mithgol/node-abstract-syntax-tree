@@ -61,7 +61,7 @@ Concatenations are performed by the [`Array.prototype.concat()`](https://develop
 
 Renderers are applied to elements of the array that represents the AST in its final form (i.e. after the last splitter), converting these elements to JavaScript strings:
 
-* If an element (`targetElement`) is an object and a renderer for its type (`targetElement.type`) was defined by a call to the `.addRenderer` method (see below), then that renderer is called and its returned result replaces the `targetElement` in the AST.
+* If an element (`targetElement`) is an object and a renderer for its type (`targetElement.type`) was defined by a call to the `.defineRenderer` method (see below), then that renderer is called and its returned result replaces the `targetElement` in the AST.
 
 * If an element does not have such a corresponding renderer, a mere `.toString` is called to convert it to a string. (Unless it's already a JavaScript string and thus there's nothing to do.)
 
@@ -112,7 +112,7 @@ In this example [the UUE module's](https://github.com/Mithgol/node-uue/) [`.s
 
 * That splitter can also process text from quotes (i.e. in the AST nodes representing quotes that appeared within the original text). A support for such processing is achieved merely by passing an item in `supportedNodeTypes` (the splitter's source code itself in not altered).
 
-### addRenderer(supportedNodeTypes, renderer)
+### defineRenderer(supportedNodeTypes, renderer)
 
 `supportedNodeTypes` is an array of node type identifiers. If one of them is equal to `targetElement.type` of some node in the AST, then the renderer is applied to that node.
 

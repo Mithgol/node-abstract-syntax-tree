@@ -83,9 +83,9 @@ ASTree.prototype.defineSplitter = function(splitter, supportedNodeTypes){
    });
 };
 
-ASTree.prototype.addRenderer = function(supportedNodeTypes, renderer){
+ASTree.prototype.defineRenderer = function(supportedNodeTypes, renderer){
    if( !Array.isArray(supportedNodeTypes) || supportedNodeTypes.length < 1 ){
-      throw new Error('Wrong `supportedNodeTypes` in `.addRenderer`.');
+      throw new Error('Wrong `supportedNodeTypes` in `.defineRenderer`.');
    }
    this.renderers.push({
       'renderer': renderer,

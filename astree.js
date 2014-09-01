@@ -11,7 +11,7 @@ var ASTree = function(){
 
 ASTree.prototype.ASTRenderer = function(AST){
    var sourceArray = AST;
-   var renderAST = this.renderAST;
+   var _this = this;
    if( !Array.isArray(sourceArray) ) sourceArray = [ sourceArray ];
 
    return sourceArray.map(function(sourceItem){
@@ -19,14 +19,14 @@ ASTree.prototype.ASTRenderer = function(AST){
       if( typeof sourceItem.type === 'undefined' ){
          return sourceItem.toString();
       }
-      var foundRenderer = this.renderers.find(function(someRenderer){
+      var foundRenderer = _this.renderers.find(function(someRenderer){
          return someRenderer.supportedNodeTypes.indexOf(
             sourceItem.type
          ) > -1;
       });
       if( typeof foundRenderer === 'undefined' ) return sourceItem.toString();
 
-      return foundRenderer.renderer( sourceItem, renderAST );
+      return foundRenderer.renderer( sourceItem, _this.renderAST );
    }).join('');
 };
 

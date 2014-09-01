@@ -5,6 +5,29 @@ var ASTree = function(){
 
    this.splitters = [];
    this.renderers = [];
+
+   this.renderAST = this.ASTRenderer.bind(this);
+};
+
+ASTree.prototype.ASTRenderer = function(AST){
+   var sourceArray = AST;
+   var renderAST = this.renderAST;
+   if( !Array.isArray(sourceArray) ) sourceArray = [ sourceArray ];
+
+   return sourceArray.map(function(sourceItem){
+      if( typeof sourceItem === 'string' ) return sourceItem;
+      if( typeof sourceItem.type === 'undefined' ){
+         return sourceItem.toString();
+      }
+      var foundRenderer = this.renderers.find(function(someRenderer){
+         return someRenderer.supportedNodeTypes.indexOf(
+            sourceItem.type
+         ) > -1;
+      });
+      if( typeof foundRenderer === 'undefined' ) return sourceItem.toString();
+
+      return foundRenderer.renderer( sourceItem, renderAST );
+   }).join('');
 };
 
 ASTree.prototype.render = function(initialString){
@@ -48,6 +71,8 @@ ASTree.prototype.render = function(initialString){
       });
       prevArray = nextArray;
    });
+   prevArray = null;
+   return this.renderAST( nextArray );
 };
 
 ASTree.prototype.addSplitter = function(splitter, supportedNodeTypes){

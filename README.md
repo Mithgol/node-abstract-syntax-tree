@@ -41,7 +41,7 @@ The work consists of the following two parts:
 
 #### Splitting
 
-Splitters are applied in the order of appearance, i.e. in the order they were defined by calls to the `.addSplitter` method (see below).
+Splitters are applied in the order of appearance, i.e. in the order they were defined by calls to the `.defineSplitter` method (see below).
 
 Each splitter is applied individually to each of the elements of the array representing the abstract syntax tree in its state left from the previous splitter.
 
@@ -67,7 +67,7 @@ Renderers are applied to elements of the array that represents the AST in its 
 
 Afterwards the elements of the AST are concatenated (in order of appearance) to a larger string, and that string is returned from the `.render` method.
 
-### addSplitter(splitter, supportedNodeTypes)
+### defineSplitter(splitter, supportedNodeTypes)
 
 Adds a splitter (also known as a tokenizer) to a tree. That splitter is later applied to individual elements of the AST when the `.render()` method is called.
 
@@ -94,7 +94,7 @@ It is therefore possible to use `supportedNodeTypes` to support branches (sub
 #### Example
 
 ```js
-someTree.addSplitter(
+someTree.defineSplitter(
    function(inputData){
       if( typeof inputData !== 'string' ) return inputData;
       return require('uue').split(inputData);

@@ -75,7 +75,7 @@ ASTree.prototype.render = function(initialString){
    return this.renderAST( nextArray );
 };
 
-ASTree.prototype.addSplitter = function(splitter, supportedNodeTypes){
+ASTree.prototype.defineSplitter = function(splitter, supportedNodeTypes){
    if( typeof supportedNodeTypes === 'undefined' ) supportedNodeTypes = [];
    this.splitters.push({
       'splitter': splitter,

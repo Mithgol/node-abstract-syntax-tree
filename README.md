@@ -112,6 +112,12 @@ In this example [the UUE module's](https://github.com/Mithgol/node-uue/) [`.s
 
 * That splitter can also process text from quotes (i.e. in the AST nodes representing quotes that appeared within the original text). A support for such processing is achieved merely by passing an item in `supportedNodeTypes` (the splitter's source code itself in not altered).
 
+### addRenderer(supportedNodeTypes, renderer)
+
+`supportedNodeTypes` is an array of node type identifiers. If one of them is equal to `targetElement.type` of some node in the AST, then the renderer is applied to that node.
+
+`renderer` is a `function(targetElement, renderAST)` that gets the target element (some node from the AST) and should render it to a string and return that string. It also gets the helper method `renderAST`. If some property of the `targetElement` is actually a subtree of AST (represented by an array of strings and nodes), the renderer may apply `renderAST()` to the value of that property and get a string out of it.
+
 ## Testing the AST module
 
 [![(build testing status)](https://travis-ci.org/Mithgol/node-abstract-syntax-tree.svg?branch=master)](https://travis-ci.org/Mithgol/node-abstract-syntax-tree)

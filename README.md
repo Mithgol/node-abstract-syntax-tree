@@ -118,7 +118,7 @@ In this example [the UUE module's](https://github.com/Mithgol/node-uue/) [`.s
 
 ## Testing the AST module
 
-[![(build testing status)](https://travis-ci.org/Mithgol/node-abstract-syntax-tree.svg?branch=master)](https://travis-ci.org/Mithgol/node-abstract-syntax-tree)
+[![(build testing status)](https://img.shields.io/travis/Mithgol/node-abstract-syntax-tree/master.svg?style=plastic)](https://travis-ci.org/Mithgol/node-abstract-syntax-tree)
 
 The tests are not included in the npm package of the module (to keep it small). Use the version from GitHub.
 

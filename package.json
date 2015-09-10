@@ -1,7 +1,7 @@
 {
 "name": "astree",
 "main": "astree.js",
-"version": "1.0.0",
+"version": "2.0.0",
 "description": "An implementation of AST (abstract syntax tree) for Node.js. It can be used to build renderers of markup languages.",
 "keywords": ["ast", "abstract syntax tree"],
 "author": { "name": "Mithgol the Webmaster" },
@@ -9,9 +9,6 @@
 "repository": {
    "type": "git",
    "url": "https://github.com/Mithgol/node-abstract-syntax-tree.git"
-},
-"dependencies": {
-   "array.prototype.find": "~1.0.0"
 },
 "scripts": {
    "pretest": "jshint astree.js test/",

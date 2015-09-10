@@ -1,5 +1,3 @@
-require('array.prototype.find');
-
 var ASTree = function(){
    if (!(this instanceof ASTree)) return new ASTree();
 

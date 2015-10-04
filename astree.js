@@ -35,11 +35,9 @@ ASTree.prototype.render = function(initialString){
    this.splitters.forEach(function(nextSplitter){
       nextArray = [];
       prevArray.forEach(function(targetElement){
-         var supportedNode = nextSplitter.supportedNodeTypes.find(function(
-            supportedNodeType
-         ){
-            return targetElement.type === supportedNodeType.type;
-         });
+         var supportedNode = nextSplitter.supportedNodeTypes.find(
+            supportedNodeType => targetElement.type === supportedNodeType.type
+         );
          if( typeof supportedNode === 'undefined' ){
             // default behaviour: apply the splitter to the target element
             nextArray = nextArray.concat(

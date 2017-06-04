@@ -1,7 +1,7 @@
 This module (`node-abstract-syntax-tree`) is an implementation of AST (abstract syntax tree).
 
 The module is written in JavaScript and requires [Node.js](http://nodejs.org/) to run.
-* Starting from v2.0.0, this module requires Node.js version 4.0.0 or newer.
+* Starting from v2.0.0, this module requires Node.js version 4.0.0 or newer. This module is tested against Node.js v4 and against the latest stable version of Node.js.
 * You may run older versions of this module in Node.js version 0.10.x or 0.12.x. These older versions of this module, however, had to contain an additional dependency ([`array.prototype.find`](https://www.npmjs.com/package/array.prototype.find)) as a polyfill for a missing [ECMAScript 2015 (ES6) feature](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) which is now a part of Node.js. And those older versions of Node.js are themselves not maintained by their developers after 2016-12-31.
 
 It is planned as a tool that assists in building renderers of markup languages, renderers that convert some initial string (for example, a text marked with [Markdown](http://daringfireball.net/projects/markdown/) or [WakabaMark](http://wakaba.c3.cx/docs/docs.html#WakabaMark)) to its another string form (for example, HTML5) using an abstract syntax tree as an intermediate representation.
